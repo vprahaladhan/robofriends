@@ -1,23 +1,16 @@
 import React from "react";
-import axios from "axios";
-import { useEffect, useState } from "react";
+import { connect } from 'react-redux'
+import { useEffect } from "react";
 import "../styles/App.css";
 import RobotsList from "../components/RobotsList";
-import { searchFieldAction } from "../actions";
+import { setSearchText, fetchRobots } from "../actions";
 
-function App({ store }) {
+function App({ searchText, robots, setSearchText, fetchRobots }) {
   // let robots = useRef();
-  const [ robots, setRobots ] = useState([])
+  // const [ robots, setRobots ] = useState([])
 
   useEffect(() => {
-    axios.get("https://jsonplaceholder.typicode.com/users").then(response => {
-      setRobots(response.data.map(robot => ({
-        id: robot.id,
-        name: robot.name,
-        username: robot.username,
-        email: robot.email
-      })));
-    });
+    fetchRobots()
   }, []);
 
   return (
@@ -25,19 +18,27 @@ function App({ store }) {
       <input
         className="pa3 ba b--green bg-lightest-blue"
         type="search"
-        value={store.getState().searchText}
+        value={searchText}
         placeholder="search robots"
-        onChange={({ target }) =>
-          store.dispatch(searchFieldAction(target.value))
-        }
+        onChange={({ target }) => setSearchText(target.value)}
       />
 
       <RobotsList
         robots={robots}
-        searchText={store.getState().searchText}
+        searchText={searchText}
       />
     </div>
   );
 }
 
-export default App;
+const mapStateToProps = state => ({
+  searchText: state.searchRobots.searchText,
+  robots: state.fetchRobots.robots
+})
+
+const mapDispatchToProps = {
+  setSearchText,
+  fetchRobots
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

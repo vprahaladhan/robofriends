@@ -6,7 +6,7 @@ const RobotsList = ({ robots, searchText }) => {
   return (
     <div className="container">
       <ErrorBoundary>
-        {robots ? (
+        {robots.length !== 0 ? (
           robots
             .filter(robot =>
               robot.name.toLowerCase().includes(searchText.toLowerCase())
