@@ -6,8 +6,6 @@ import RobotsList from "../components/RobotsList";
 import { setSearchText, fetchRobots } from "../actions";
 
 function App({ searchText, robots, setSearchText, fetchRobots }) {
-  // let robots = useRef();
-  // const [ robots, setRobots ] = useState([])
 
   useEffect(() => {
     fetchRobots()
