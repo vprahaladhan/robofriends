@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from 'react-redux'
 import { useEffect } from "react";
+
 import "../styles/App.css";
 import RobotsList from "../components/RobotsList";
 import { setSearchText, fetchRobots } from "../actions";
@@ -13,6 +14,8 @@ function App({ searchText, robots, setSearchText, fetchRobots }) {
 
   return (
     <div className="App tc">
+      <h1 className='f1'>RoboFriends</h1>
+
       <input
         className="pa3 ba b--green bg-lightest-blue"
         type="search"
