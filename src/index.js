@@ -6,10 +6,12 @@ import { combineReducers } from "redux";
 import thunkMiddleware from "redux-thunk";
 import { createLogger } from "redux-logger";
 import { createStore, applyMiddleware } from "redux";
+
 import "./styles/index.css";
 import App from "./containers/App";
 import { robotsReducer } from "./reducers/robotsReducer";
 import { searchTextReducer } from "./reducers/searchTextReducer";
+import * as serviceWorker from './registerServiceWorker';
 
 const rootReducer = combineReducers({
   searchRobots: searchTextReducer,
@@ -30,3 +32,5 @@ ReactDOM.render(
 
 // renderApp()
 // store.subscribe(renderApp)
+
+serviceWorker.register();
